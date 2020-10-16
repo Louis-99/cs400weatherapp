@@ -28,5 +28,5 @@ clean:
 	$(RM) .*.weather_app_cache
 
 run: build
-	echo "to run the file: ./weatherapp {commands}"
+	echo "to run the program: ./weatherapp {commands}"
 
