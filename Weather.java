@@ -1,3 +1,11 @@
+// --== CS400 File Header Information ==--
+// Name: Tianwei Bao
+// Email: tbao7@wisc.edu
+// Team: JB
+// Role: Data Wranglers
+// TA: Harper
+// Lecturer: Gary Dahl
+// Notes to Grader: N/A
 import java.time.LocalDateTime;
 
 /**
@@ -55,10 +63,12 @@ public class Weather implements Comparable, java.io.Serializable {
         this.windSpeed = windSpeed;
         this.visibility = visibility;
 
+
         // setting marked time for each weather object
         if (markedTime == null) {
             this.markedTime = LocalDateTime.now();
         }
+
     }
 
     /**
@@ -98,30 +108,12 @@ public class Weather implements Comparable, java.io.Serializable {
     }
 
     /**
-     * The mutator of longitude
-     *
-     * @param longitude the value of longitude
-     */
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    /**
      * The accessor of latitude
      *
      * @return the value of latitude
      */
     public double getLatitude() {
         return this.latitude;
-    }
-
-    /**
-     * The mutator of latitude
-     *
-     * @param latitude the value of latitude
-     */
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
     }
 
     /**
@@ -134,30 +126,12 @@ public class Weather implements Comparable, java.io.Serializable {
     }
 
     /**
-     * The mutator of waetherDescription
-     *
-     * @param weatherDescription the value of weatherDescrption
-     */
-    public void setWeatherDescription(String weatherDescription) {
-        this.weatherDescription = weatherDescription;
-    }
-
-    /**
      * The accessor of temperature
      *
      * @return the value of temperature
      */
     public double getTemperature() {
         return this.temperature;
-    }
-
-    /**
-     * The mutator of temperature
-     *
-     * @param temperature the value of temperature
-     */
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
     }
 
     /**
@@ -170,30 +144,12 @@ public class Weather implements Comparable, java.io.Serializable {
     }
 
     /**
-     * The mutator of apparentTemperature
-     *
-     * @param apparentTemperature the value of apparentTemperature
-     */
-    public void setApparentTemperature(double apparentTemperature) {
-        this.apparentTemperature = apparentTemperature;
-    }
-
-    /**
      * The accessor of minTemperature
      *
      * @return the value of minTemperature
      */
     public double getMinTemperature() {
         return this.minTemperature;
-    }
-
-    /**
-     * The mutator of minTemperature
-     *
-     * @param minTemperature the value of minTemperature
-     */
-    public void setMinTemperature(double minTemperature) {
-        this.minTemperature = minTemperature;
     }
 
     /**
@@ -206,48 +162,12 @@ public class Weather implements Comparable, java.io.Serializable {
     }
 
     /**
-     * The mutator of maxTemperature
-     *
-     * @param maxTemperature the value of maxTemperature
-     */
-    public void setMaxTemperature(double maxTemperature) {
-        this.maxTemperature = maxTemperature;
-    }
-
-    /**
-     * The accessor of pressure
-     *
-     * @return the value of pressure
-     */
-    public double getPressure() {
-        return this.pressure;
-    }
-
-    /**
-     * The mutator of pressure
-     *
-     * @param pressure the value of pressure
-     */
-    public void setPressure(double pressure) {
-        this.pressure = pressure;
-    }
-
-    /**
      * The accessor of humidity
      *
      * @return the value of humidity
      */
     public double getHumidity() {
         return this.humidity;
-    }
-
-    /**
-     * The mutator of humidity
-     *
-     * @param humidity the value of humidity
-     */
-    public void setHumidity(double humidity) {
-        this.humidity = humidity;
     }
 
     /**
@@ -260,15 +180,6 @@ public class Weather implements Comparable, java.io.Serializable {
     }
 
     /**
-     * The mutator of windSpeed
-     *
-     * @param windSpeed the value of windSpeed
-     */
-    public void setWindSpeed(double windSpeed) {
-        this.windSpeed = windSpeed;
-    }
-
-    /**
      * The accessor of visibility
      *
      * @return the value of visibility
@@ -278,16 +189,12 @@ public class Weather implements Comparable, java.io.Serializable {
     }
 
     /**
-     * The mutator of visibility
+     * This method serves for comparison between cities
      *
-     * @param visibility the value of visibility
+     * @param o the another Weather Object used to compare with itself
+     * @return 1 if itself is larger than o, vice versa.
      */
-    public void setVisibility(double visibility) {
-        this.visibility = visibility;
-    }
-
     @Override public int compareTo(Object o) {
-        Weather weather = (Weather) o;
         return this.city.compareTo(((Weather) o).city);
     }
 }

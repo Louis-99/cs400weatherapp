@@ -1,3 +1,11 @@
+// --== CS400 File Header Information ==--
+// Name: Yunzhao Liu
+// Email: liu995@wisc.edu
+// Team: JB
+// Role: Front End Developer
+// TA: Harper
+// Lecturer: Florian Heimerl
+// Notes to Grader: N/A
 import java.util.ArrayList;
 
 /**

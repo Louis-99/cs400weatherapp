@@ -1,3 +1,12 @@
+// --== CS400 File Header Information ==--
+// Name: Jiahe Jin
+// Email: jjin82@wisc.edu
+// Team: JB
+// Role: Back End Developer
+// TA: Harper
+// Lecturer: Florian Heimerl
+// Notes to Grader: All of our classes implements the java.io.Serializable to serialize the file into
+// caches to store the data for next time of use.
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -21,38 +30,6 @@ public class CityNameList implements java.io.Serializable {
 
 
     /**
-     * The city-nation pair that will be loaded to the final ArrayList of
-     * CityNameList to allow access of both city and nation.
-     */
-    public class pair implements Comparable, java.io.Serializable {
-        public String city;
-        public String nation;
-
-        /**
-         * The inner class constructor instantiates the pair of city and its
-         * corresponded nation.
-         *
-         * @param city   the name of a city
-         * @param nation the name of a nation
-         */
-        public pair(String city, String nation) {
-            this.city = city;
-            this.nation = nation;
-        }
-
-        /**
-         * The override method used to help compare the city of this pair when the pair
-         * is called in the Collection.sort() method.
-         *
-         * @param o the object of pair being compared with itself
-         */
-        @Override public int compareTo(Object o) {
-            return city.compareTo(((pair) o).city);
-        }
-
-    }
-
-    /**
      * The default constructor comes to instantiate the two blank ArrayList for both
      * city and its corresponded nation.
      */
@@ -74,10 +51,11 @@ public class CityNameList implements java.io.Serializable {
         Object object = jsonParser.parse(reader); // parse the reader into the json object
         JSONArray searchList = (JSONArray) object; // cast jason object into JSONArray
 
-        for (int i = 0; i < searchList.size(); i++) {
-            city.add(((JSONObject) searchList.get(i)).get("name").toString());
-            nation.add(((JSONObject) searchList.get(i)).get("country").toString());
+        for (Object o : searchList) {
+            city.add(((JSONObject) o).get("name").toString());
+            nation.add(((JSONObject) o).get("country").toString());
         }
+
     }
 
     /**
@@ -104,9 +82,8 @@ public class CityNameList implements java.io.Serializable {
             name.substring(0, 1).toUpperCase() + name.substring(1); // Capitalize the first letter
         ArrayList sortedList = this.sortCityByStartWith(name);
         ArrayList finalList = new ArrayList();
-        for (int i = 0; i < sortedList.size(); i++) {
-            finalList.add(
-                ((pair) sortedList.get(i)).city + "     --" + ((pair) sortedList.get(i)).nation);
+        for (Object o : sortedList) {
+            finalList.add(((pair) o).city + "     --" + ((pair) o).nation);
         }
         Iterator<String> itCity = finalList.iterator();
         return itCity;
@@ -126,9 +103,8 @@ public class CityNameList implements java.io.Serializable {
         country = country.toUpperCase(); // Capitalize the first letter
         ArrayList sortedList = this.sortCityByNationAndStartWith(name, country);
         ArrayList finalList = new ArrayList();
-        for (int i = 0; i < sortedList.size(); i++) {
-            finalList.add(
-                ((pair) sortedList.get(i)).city + "     --" + ((pair) sortedList.get(i)).nation);
+        for (Object o : sortedList) {
+            finalList.add(((pair) o).city + "     --" + ((pair) o).nation);
         }
         Iterator<String> itCity = finalList.iterator();
         return itCity;
@@ -178,27 +154,37 @@ public class CityNameList implements java.io.Serializable {
         return sortList;
     }
 
-    /**
-     * This method is the test method which will finally be deleted. You can try
-     * other letters of cities in this method to search any cities as you want.
-     */
-    public void getCity() {
-        Iterator<String> itCity = this.search("Wuh", "cn");
-        while (itCity.hasNext()) {
-            System.out.println(itCity.next());
-        }
-    }
 
     /**
-     * This method is also the test method which will finally be deleted.
+     * The city-nation pair that will be loaded to the final ArrayList of
+     * CityNameList to allow access of both city and nation.
      */
-    public static void main(String[] args) {
-        CityNameList nameList = new CityNameList();
-        try {
-            nameList.load();
-            nameList.getCity();
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+    public static class pair implements Comparable, java.io.Serializable {
+        public String city;
+        public String nation;
+
+        /**
+         * The inner class constructor instantiates the pair of city and its
+         * corresponded nation.
+         *
+         * @param city   the name of a city
+         * @param nation the name of a nation
+         */
+        public pair(String city, String nation) {
+            this.city = city;
+            this.nation = nation;
         }
+
+        /**
+         * The override method used to help compare the city of this pair when the pair
+         * is called in the Collection.sort() method.
+         *
+         * @param o the object of pair being compared with itself
+         */
+        @Override public int compareTo(Object o) {
+            return city.compareTo(((pair) o).city);
+        }
+
     }
+
 }

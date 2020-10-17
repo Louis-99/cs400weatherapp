@@ -1,3 +1,11 @@
+// --== CS400 File Header Information ==--
+// Name: Yunzhao Liu
+// Email: liu995@wisc.edu
+// Team: JB
+// Role: Front End Developer
+// TA: Harper
+// Lecturer: Florian Heimerl
+// Notes to Grader: N/A
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -169,7 +177,11 @@ public class WeatherApp {
                         "favorite list is empty. \nuse --add to add city into the list. \nuse --help to see the help document.");
             } else {
                 for (String city : favoriteList) {
-                    System.out.println(tree.getImportantInfo(city));
+                    try {
+                        System.out.println(tree.getImportantInfo(city));
+                    } catch (ParseException e) {
+                        System.out.println("Exceed the call limit of the openweathermap api id");
+                    }
                 }
             }
         } else {
@@ -186,7 +198,11 @@ public class WeatherApp {
                     System.out.println("favorite list is empty. \nuse --add to add city into the list.");
                 } else {
                     for (String city : favoriteList) {
-                        System.out.println(tree.getDetailInfo(city));
+                        try {
+                            System.out.println(tree.getDetailInfo(city));
+                        } catch (ParseException e) {
+                            System.out.println("Exceed the call limit of the openweathermap api id");
+                        }
                     }
                 }
             } else {
@@ -234,10 +250,14 @@ public class WeatherApp {
                             System.out.println("\"" + city + "\" does not in the dataset");
                             continue;
                         }
-                        if (parser.isArgDetail()) {
-                            System.out.println(tree.getDetailInfo(city));
-                        } else {
-                            System.out.println(tree.getImportantInfo(city));
+                        try {
+                            if (parser.isArgDetail()) {
+                                System.out.println(tree.getDetailInfo(city));
+                            } else {
+                                System.out.println(tree.getImportantInfo(city));
+                            }
+                        } catch (ParseException e) {
+                            System.out.println("Exceed the call limit of the openweathermap api id");
                         }
                     }
                 }
@@ -262,6 +282,7 @@ public class WeatherApp {
                         }
                         Scanner scanner = new Scanner(System.in);
                         if (!scanner.nextLine().trim().equals("")) {
+                            scanner.close();
                             break;
                         }
                     }
